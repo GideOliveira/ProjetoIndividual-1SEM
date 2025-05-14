@@ -90,3 +90,41 @@
     padding: 10%;
     margin-top: -10%;
 }
+
+.shows {
+    background-color: #421C1F;
+    height: 100vh;
+}
+
+.shows h2 {
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+.shows .boxes {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 40px 25px 40px;
+}
+
+.box img {
+    width: 90%;
+    margin-top: 10px;
+}
+
+.box {
+    width: 50vh;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+
+.shows button {
+    width: 120px;
+    border-radius: 10px;
+    margin-left: 46%;
+}
