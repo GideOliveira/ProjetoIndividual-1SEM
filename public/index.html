@@ -7,6 +7,8 @@
     <title>Tasha e Tracie</title>
 
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/slide.css">
+    <script src="js/slide.js" defer></script>
 </head>
 
 <body>
@@ -15,31 +17,59 @@
         <div class="container">
             <img class="logo" src="img/img_logo.webp">
             <ul class="navbar">
-                <li>
-                    <a href="">Inicial</a>
+                <li class="agora">
+                    <a href="#">Inicial</a>
                 </li>
                 <li>
                     <a href="">Álbuns</a>
                 </li>
                 <li>
-                    <a href="">Login</a>
+                    <a href="./login.html">Login</a>
                 </li>
                 <li>
-                    <a href="">Cadastro</a>
+                    <a href="./cadastro.html">Cadastro</a>
                 </li>
             </ul>
         </div>
     </div>
         <!-- final header -->
-         <!-- primeira img -->
-    <div class="banner">
-        <div class="container">
-            <h1>MPIF</h1>
-            <div class="text">
-                <p>(Mulher Preta Independente de Favela)</p>
+
+    <section class="slider">
+        <div class="slider-content">
+
+            <input type="radio" name="btn-radio" id="radio1">
+            <input type="radio" name="btn-radio" id="radio2">
+            <input type="radio" name="btn-radio" id="radio3">
+
+            <div class="slide-box primeiro">
+                <img class="img-slide" src="img/carrossel1.png" alt="slide 1">
             </div>
+
+            <div class="slide-box">
+                <img class="img-slide" src="img/carrossel2.png" alt="slide 2">
+            </div>
+
+            <div class="slide-box">
+                <img class="img-slide" src="img/carrossel1.png" alt="slide 3">
+            </div>
+
+            <div class="nav-auto">
+                <div class="auto-btn1"></div>
+                <div class="auto-btn2"></div>
+                <div class="auto-btn3"></div>
+            </div>
+
+            <div class="nav-manual">
+                <label for="radio1" class="manual-btn"></label>
+                <label for="radio2" class="manual-btn"></label>
+                <label for="radio3" class="manual-btn"></label>
+            </div>
+
         </div>
-    </div>
+    </section>
+
+         <!-- primeira img -->
+
     <!-- final primeira img -->
     <!-- começo "conheça as gemeas" -->
     <div class="conheca">
@@ -60,30 +90,32 @@
         <div class="boxes">
             <div class="box">
                 <img src="img/1show.png" alt="">
+                <p>Show 1</p>
+            </div>
+            <div class="box">
+                <img src="img/2show.png" alt="">
+                <p>Show 2</p>
             </div>
             <div class="box">
                 <img src="img/3show.png" alt="">
-            </div>
-            <div class="box">
-                <img src="img/3show.png" alt="">
+                <p>Show 3</p>
             </div>
         </div>
-        <button onclick="mostrar()">Mostrar mais</button>
+        <button onclick="mostrar()">Mostrar Mais</button>
     </div>
 
     <div class="sobremim">
         <div class="container">
             <h2>SOBRE MIM</h2>
             <p>Me chamo Giovanna, tenho 18 anos e nasci na Zona Leste de São Paulo. Desde criança, a música sempre esteve presente na minha vida, e o rap conquistou meu coração. Tasha e Tracie são duas grandes referências para mim, não só pela música, mas pela força e representatividade que transmitem.</p>
-            <div class="img">
-                <img src="img/fotominha.jpg">
-            </div>
         </div>
+            <div class="img">
+                <img src="img/minhafoto.png">
+            </div>
     </div>
 
     <div class="rodape">
         <div class="container">
-            <img src="img/img_logo.webp" alt="">
             <ul class="footer">
                 <li>
                     <a href="">Inicial</a>
@@ -100,8 +132,9 @@
             </ul>
             <div class="contato">
                 <p>CONTATO:</p>
-                <p>giovanna.doliveira@sptech.school</p>
+                <a href="https://outlook.office.com/mail/giovanna.doliveira@sptech.school">giovanna.doliveira@sptech.school</a>
             </div>
+            <img src="img/img_logo.webp" alt="">
         </div>
     </div>
     

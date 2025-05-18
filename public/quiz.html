@@ -3,12 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Tasha & Tracie</title>
+    <link rel="stylesheet" href="./styles/quiz.css">
 </head>
 <body>
-    <header>
-        <h1>Quiz Tasha e Tracie</h1>
+    <div class="header">
+        <h1>Quiz Tasha e Tracie - <span style="color: #9aeabc;">Nível fácil</span></h1>
         <p>Teste seus conhecimentos sobre as gêmeas e veja qual pontuação você consegue fazer!</p>
-    </header>
+    </div>
+
+    <div class="container">
+        <h1>Quiz</h1>
+        <div class="quiz">
+            <h2 id="question">Questão</h2>
+            <div id="answer-buttons">
+                <button class="btn">Pergunta 1</button>
+                <button class="btn">Pergunta 2</button>
+                <button class="btn">Pergunta 3</button>
+                <button class="btn">Pergunta 4</button>
+            </div>
+            <button id="next-btn">Próxima</button>
+        </div>
+    </div>
+    <script src="js/quiz.js"></script>
 </body>
 </html>
