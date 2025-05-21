@@ -34,6 +34,13 @@ body {
     padding: 30px;
 }
 
+.container h1 {
+    font-weight: 600;
+    color: #2c1315;
+    border-bottom: 1px solid #333;
+    padding-bottom: 30px;
+}
+
 .quiz {
     padding: 20px 0;
 }
