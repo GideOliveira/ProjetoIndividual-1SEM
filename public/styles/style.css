@@ -83,7 +83,7 @@
     padding: 50px 0px 10px;
 }
 
- .conheca .container {
+.conheca .container {
     display: flex;
     background-color: white;
     padding: 50px;
@@ -109,6 +109,72 @@
     margin-top: -8%;
 }
 
+.colaborar {
+    background-color: #421C1F;
+    height: 90vh;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+}
+
+.colaborar h3 {
+    display: flex;
+    justify-content: center;
+    margin-top: -100px;
+    color: #fff;
+    padding: 70px;
+}
+
+.colaborar .container {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 50%;
+    width: 50%;
+    border-radius: 20px;
+}
+
+.colaborar .container .textfield {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+.colaborar .container .textfield input {
+    border: #000 solid 2px;
+    width: 30%;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 12pt;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.colaborar .container .textfield span {
+    margin-bottom: 10px;
+}
+
+.colaborar .container .btn-calc {
+    width: 63%;
+    padding: 16px 0px;
+    margin: 25px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #421C1F;
+    cursor: pointer;
+    box-shadow: 0px 10px 40px -12px #1d0d0f;
+}
+
 .shows {
     background-color: #421C1F;
     height: 90vh;
@@ -118,11 +184,9 @@
     color: white;
     display: flex;
     justify-content: center;
-    padding: 20px;
-    margin-top: 40px;
+    padding-top: 40px;
     font-size: 30px;
 }
-
 
 .shows .boxes {
     display: flex;
@@ -164,7 +228,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0,176,155,0.5), rgba(150,201,61,1));
+    background: linear-gradient(to bottom, rgba(62, 4, 4, 0.753), rgba(0, 0, 0, 0.496));
     z-index: 2;
     transition: 0.5s all;
     opacity: 0;

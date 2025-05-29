@@ -21,9 +21,6 @@
                     <a href="#">Inicial</a>
                 </li>
                 <li>
-                    <a href="">Álbuns</a>
-                </li>
-                <li>
                     <a href="./login.html">Login</a>
                 </li>
                 <li>
@@ -42,15 +39,15 @@
             <input type="radio" name="btn-radio" id="radio3">
 
             <div class="slide-box primeiro">
-                <img class="img-slide" src="img/carrossel1.png" alt="slide 1">
+                <img class="img-slide" src="img/(Mulher Preta Independente de Favela) (7).png" alt="slide 1">
             </div>
 
             <div class="slide-box">
-                <img class="img-slide" src="img/carrossel2.png" alt="slide 2">
+                <img class="img-slide" src="img/(Mulher Preta Independente de Favela) (6).png" alt="slide 2">
             </div>
 
             <div class="slide-box">
-                <img class="img-slide" src="img/carrossel1.png" alt="slide 3">
+                <img class="img-slide" src="img/(Mulher Preta Independente de Favela) (13).png" alt="slide 3">
             </div>
 
             <div class="nav-auto">
@@ -85,6 +82,18 @@
         </div>
     </div>
 <!-- final do conheça -->
+
+    <div class="colaborar">
+        <h3>SE VOCÊ ESCUTA AS MÚSICAS PELO SPOTIFY, CALCULE AQUI QUANTO QUE VOCÊ CONTRIBUI COM AS GÊMEAS:</h4>
+        <div class="container">
+            <div class="textfield">
+                <span>Em média, quantas músicas das gêmeas você ouve por dia?</span><br>
+                <input type="number" id="input_qtdMusica" placeholder="Digite aqui">
+            </div>
+            <button class="btn-calc" onclick="calcular()">CALCULAR</button>
+                <span id="div_mensagem"></span><br>
+        </div>
+    </div>
     
 
     <div class="sobremim">
@@ -106,7 +115,6 @@
                 <div class="inf-card">
                     <h3>SHOW 1</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <a href="#">Ver Mais</a>
                 </div>
             </div>
 
@@ -115,7 +123,6 @@
                 <div class="inf-card">
                     <h3>SHOW 2</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <a href="#">Ver Mais</a>
                 </div>
             </div>
 
@@ -124,7 +131,6 @@
                 <div class="inf-card">
                     <h3>SHOW 3</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <a href="#">Ver Mais</a>
                 </div>
             </div>
 
@@ -160,6 +166,27 @@
 </html>
 
 <script>
+    function calcular() {
+        var qtdMusica = Number(input_qtdMusica.value);
+        var contrDia = 0.0226 * qtdMusica;
+        var contrMes = contrDia * 30;
+        div_mensagem.innerHTML = "";
 
+        if (qtdMusica == "") {
+            div_mensagem.innerHTML = "Insira a quantidade de músicas!"
+        } else if (qtdMusica < 0) {
+            div_mensagem.innerHTML = "Insira uma quantidade válida!"
+        } else {
+
+            div_mensagem.innerHTML = `
+            Em média, cada música tem 3 minutos. Com isso, você ouve <strong>${qtdMusica * 3} minutos</strong> por dia.<br>
+            O Spotify paga R$0,0226 por play, ou seja, você contribui para as gêmeas em <strong>R$${contrDia.toFixed(2)}</strong> por dia.<br>
+            Por volta de <strong>R$${contrMes.toFixed(2)}</strong> no mês.
+            `
+
+        }
+
+
+    }
 
 </script>
