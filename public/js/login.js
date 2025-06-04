@@ -3,15 +3,15 @@ function entrar() {
         var senhaVar = input_senha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            //mensagem de campos em branco  
+            mensagem_erro.innerHTML = "Preencha os campos!";
 
             return false;
-        }
+        } 
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
 
-        fetch("/usuarios/autenticar", {
+        fetch("/usuarios/entrar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -52,4 +52,4 @@ function entrar() {
         })
 
         return false;
-    }
+}

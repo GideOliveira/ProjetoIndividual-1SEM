@@ -117,6 +117,7 @@ function handleNextButton() {
         mostrarQuestao();
     } else {
         showScore();
+        finalizar();
     }
 }
 
@@ -127,5 +128,39 @@ nextButton.addEventListener("click", () => {
         ComecarQuiz();
     }
 })
+
+function finalizar() {
+    var idUsuario = sessionStorage.ID;
+    var idQuiz = 2;
+    fetch("/quiz/finalizar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                scoreServer: score,
+                idUsuarioServer: idUsuario,
+                idQuizServer: idQuiz
+            })
+        }).then(function (resposta) {
+            console.log("Inserindo dados no quiz!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+            } else {
+
+                console.log("Houve um erro ao tentar guardar informaçôes do quiz!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+}
+
 
 ComecarQuiz();

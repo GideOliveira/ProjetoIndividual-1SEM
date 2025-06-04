@@ -49,21 +49,6 @@
     align-items: flex-end;
 }
 
-.banner {
-    background-image: url('../img/banner1.png');
-    height: 100%;
-    background-size: cover;
-}
-
-.banner .container {
-    font-size: 50px;
-    padding: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-}
-
 .conheca {
     background-image: url('../img/CONHEÇAtt.png');
     height: 90vh;
@@ -175,6 +160,12 @@
     box-shadow: 0px 10px 40px -12px #1d0d0f;
 }
 
+.colaborar .container .btn-calc:hover {
+    background-color: #421C1F;
+    color: #fff;
+    transition: 0.5s;
+}
+
 .shows {
     background-color: #421C1F;
     height: 90vh;
@@ -197,7 +188,6 @@
 .box img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
     position: absolute;
     top: 0;
     left: 0;
@@ -278,6 +268,25 @@
     box-shadow: 0px 7px 10px rgba(0,0,0,0.5);
 }
 
+.top3 {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top3 .boxes {
+    display: flex;
+    padding: 30px;
+} 
+
+.top3 .boxes .box {
+    height: 40vh;
+    width: 50vh;
+    margin: 30px;
+}
+
 .sobremim {
     height: 90vh;
     display: flex;
@@ -310,7 +319,7 @@
     flex-direction: row;
     justify-content: space-between;
     color: white;
-    height: 80px;
+    height: 100px;
     padding: 20px;
 }
 

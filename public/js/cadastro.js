@@ -6,19 +6,22 @@ function cadastrar() {
     var confirmacaoSenhaVar = input_confSenha.value;
 
 
-    // Verificando se há algum campo em branco
     if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "" ) {
-      
-        // colocar div para sinalizar campos em branco
-        mensagem_erro.innerHTML = "Preencha todos os campos para cadastrar";
+        mensagem_erro.innerHTML = "Preencha todos os campos para se cadastrar!";
       return;
-    } else{
-      mensagem_erro.innerHTML = "feito com sucesso";
+    } else if (senhaVar != confirmacaoSenhaVar) {
+      mensagem_erro.innerHTML = "Senhas diferentes!";
+      return;
+    } else if (!emailVar.includes("@")) {
+      mensagem_erro.innerHTML = "Insira um e-mail válido!";
+      return;
+    } else if (senhaVar.length < 4) {
+      mensagem_erro.innerHTML = "Senha deve contém 4 ou mais caracteres!";
+      return;
+    } 
+    else{
+      mensagem_erro.innerHTML = "Cadastro feito com sucesso";
     }
-    // } else if (nomevar.length < 6){
-    //   mensagem_erro.innerHTML = `Nome pequeno`;
-    // }
-
     
     fetch("/usuarios/cadastrar", { 
       method: "POST",// metodo post ele insere no bd
@@ -36,16 +39,11 @@ function cadastrar() {
         
 
         if (resposta.ok) {
-          
-          // colocar div para sinalizar que o cadastro foi realizado com sucesso
-
           setTimeout(() => {
             window.location = "login.html";
           }, "2000");
 
         } else {
-
-          // colocar div para sinalizar erro
 
           throw "Houve um erro ao tentar realizar o cadastro!";
         }

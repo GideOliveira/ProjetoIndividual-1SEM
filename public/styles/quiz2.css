@@ -13,6 +13,23 @@ body {
     height: 100vh;
 }
 
+.row_voltar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 25px;
+    position: absolute;
+}
+
+.div_voltar {
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.div_voltar:hover {
+    transform: scale(1.1);
+}
+
 .header {
     display: flex;
     justify-content: center;
