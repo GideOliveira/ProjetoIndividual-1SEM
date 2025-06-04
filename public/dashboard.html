@@ -8,19 +8,22 @@
     <title>Dashboard</title>
 
     <link rel="stylesheet" href="styles/dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js/dashboard.js"></script>
 </head>
-<body>
+
+<body onload="buscarDados()">
 
     <div class="container">
         <div class="side-bar">
             <img src="img/logo.webp" alt="">
 
             <div class="hello">
-                <h3>Olá, <span id="oi_usuario">undefined</span>!</h3>
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
             <ul>
@@ -31,71 +34,110 @@
         </div>
 
         <div class="conteudoKPI">
-            <h3>Numero de usuários que fizeram o ranking:</h3>
+            <h3>Quantidade de usuários que fizeram o quiz:</h3>
             <div id="conteudoQtdUsuario" class="areaNumero">
-                <span id="numeroUsuario">0</span>
+                <span id="usuario_total">0</span>
                 <span class="subtituloUsuario">Usuários</span>
             </div>
         </div>
 
         <div class="container-graficos">
 
-                <div class="chart-container">
-                    <h2>Acertos por pergunta Quiz Fácil</h2>
-                    <canvas id="myChart2"></canvas>
-                </div>
+            <div class="chart-container">
+                <h2>Porcentagem de resposta Quiz Fácil</h2>
+                <canvas id="pie"></canvas>
+            </div>
 
-                <div class="chart-container">
-                    <h2>Acertos por pergunta Quiz Difícil</h2>
-                    <canvas id="myChart3"></canvas>
-                </div>
+            <div class="chart-container">
+                <h2>Porcentagem de resposta Quiz Difícil</h2>
+                <canvas id="myChart3"></canvas>
+            </div>
 
+        </div>
+        <div class="dash">
+            <div id="alerta">
+            </div>
+
+            <div class="btns-dash" id="btnAquario">
+                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
+            </div>
+            <div id="graficos">
             </div>
         </div>
     </div>
 </body>
+
 </html>
 
 <script>
-        oi_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-        var idUsuario = Number(sessionStorage.ID_USUARIO);
 
-        const ctx = document.getElementById('myChart');
-        const perguntas = ['Pergunta 1', 'Pergunta 2', 'Pergunta 3', 'Pergunta 4', 'pergunta 5'];
-        const acertosPorPergunta = [8, 6, 4, 9, 3];
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    const usuario = sessionStorage.ID;
 
-        new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: perguntas,
-                datasets: [{
-                    label: 'Acertos por Pergunta',
-                    data: acertosPorPergunta,
-                    backgroundColor: ['#962828b2', '#E6C3A1', '#d2d2d2', '#000', '#f2f2f2']
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'left'
-                    }
+    function buscarDados() {
+        fetch("/quiz/exibirQtdUserQuiz")
+            .then((resposta) => {
+                if (resposta.ok) {
+                    console.log(resposta)
+                    resposta.json().then((qtdUserQuiz) => {
+                        conteudoQtdUsuario.innerHTML =
+                            `
+                <span id="numeroUsuario">${qtdUserQuiz[0].quantidadeUsuario}</span>
+                <span class="subtituloUsuario">Usuários</span>
+                `
+                        buscarDados2()
+                        buscarDados3()
+
+                    })
+                } else {
+                    console.log('Deu erro no then')
                 }
-            }
-        });
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
 
-        const ctx2 = document.getElementById('myChart2');
-        const perguntasF = ['Pergunta 1', 'Pergunta 2', 'Pergunta 3', 'Pergunta 4', 'pergunta 5'];
-        const acertosPorPerguntaF = [8, 6, 4, 9, 3];
 
+    function buscarDados2() {
+
+        fetch(`/quiz/exibirQtdUserQuiz2/${usuario}`)
+            .then((resposta) => {
+                if (resposta.ok) {
+                    console.log('aiusniuasdisin', resposta)
+                    resposta.json().then((qtdUserQuiz) => {
+                        console.log(qtdUserQuiz);
+                        plotarGraficoPizza(qtdUserQuiz)
+                    })
+                } else {
+                    console.log('Deu erro no then')
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function plotarGraficoPizza(qtdUserQuiz) {
+        var labels = []
+        var registro = Number(qtdUserQuiz[0]['SUM(acertos)']);
+        var media = registro / Number(qtdUserQuiz[0]['COUNT(tentativa.id)'])
+        var acerto = Number((media * 100) / 5)
+        var erro = (Number(100) - acerto)
+        var acerto2 = acerto.toFixed(1)
+        var erro2 = erro.toFixed(1)
+
+        // console.log(registro)
+
+        const ctx2 = document.getElementById('pie');
         new Chart(ctx2, {
             type: 'pie',
             data: {
-                labels: perguntas,
+                labels: ['Acertos', 'erros'],
                 datasets: [{
                     label: 'Acertos por Pergunta',
-                    data: acertosPorPergunta,
-                    backgroundColor: ['#962828b2', '#E6C3A1', '#d2d2d2', '#000', '#f2f2f2']
+                    data: [acerto2, erro2],
+                    backgroundColor: ['#E6C3A1', '#962828b2']
                 }]
             },
             options: {
@@ -108,18 +150,48 @@
             }
         });
 
-        const ctx3 = document.getElementById('myChart3');
-        const perguntasD = ['Pergunta 1', 'Pergunta 2', 'Pergunta 3', 'Pergunta 4', 'pergunta 5'];
-        const acertosPorPerguntaD = [8, 6, 4, 9, 3];
 
-        new Chart(ctx3, {
+    }
+
+    function buscarDados3() {
+
+        fetch(`/quiz/exibirQtdUserQuiz3/${usuario}`)
+            .then((resposta) => {
+                if (resposta.ok) {
+                    console.log('aiusniuasdisin', resposta)
+                    resposta.json().then((qtdUserQuiz) => {
+                        console.log(qtdUserQuiz);
+                        plotarGraficoPizza2(qtdUserQuiz)
+                    })
+                } else {
+                    console.log('Deu erro no then')
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function plotarGraficoPizza2(qtdUserQuiz) {
+        var labels = []
+        var registro = Number(qtdUserQuiz[0]['SUM(acertos)']);
+        var media = registro / Number(qtdUserQuiz[0]['COUNT(tentativa.id)'])
+        var acerto = Number((media * 100) / 5)
+        var erro = (Number(100) - acerto)
+        var acerto2 = acerto.toFixed(1)
+        var erro2 = erro.toFixed(1)
+
+        // console.log(registro)
+
+        const ctx2 = document.getElementById('myChart3');
+        new Chart(ctx2, {
             type: 'pie',
             data: {
-                labels: perguntas,
+                labels: ['Acertos', 'erros'],
                 datasets: [{
                     label: 'Acertos por Pergunta',
-                    data: acertosPorPergunta,
-                    backgroundColor: ['#962828b2', '#E6C3A1', '#d2d2d2', '#000', '#f2f2f2']
+                    data: [acerto2, erro2],
+                    backgroundColor: ['#E6C3A1', '#962828b2']
                 }]
             },
             options: {
@@ -131,7 +203,51 @@
                 }
             }
         });
-    </script>
+
+
+    }
+
+    // new Chart(ctx, {
+    //     type: 'pie',
+    //     data: {
+    //         labels: perguntas,
+    //         datasets: [{
+    //             label: 'Acertos por Pergunta',
+    //             data: acertosPorPergunta,
+    //             backgroundColor: ['#d2d2d2', '#000', '#f2f2f2']
+    //         }]
+    //     },
+
+    // });
+
+
+
+
+
+    // const ctx3 = document.getElementById('myChart3');
+    // const perguntasD = ['Pergunta 1', 'Pergunta 2', 'Pergunta 3', 'Pergunta 4', 'pergunta 5'];
+    // const acertosPorPerguntaD = [8, 6, 4, 9, 3];
+
+    // new Chart(ctx3, {
+    //     type: 'pie',
+    //     data: {
+    //         labels: perguntas,
+    //         datasets: [{
+    //             label: 'Acertos por Pergunta',
+    //             data: acertosPorPergunta,
+    //             backgroundColor: ['#962828b2', '#E6C3A1', '#d2d2d2', '#000', '#f2f2f2']
+    //         }]
+    //     },
+    //     options: {
+    //         plugins: {
+    //             legend: {
+    //                 display: true,
+    //                 position: 'left'
+    //             }
+    //         }
+    //     }
+    // });
+</script>
 
 
 </body>

@@ -21,6 +21,46 @@ function exibirQtdUserQuiz(req, res) {
     );
 }
 
+function exibirQtdUserQuiz2(req, res) {
+        var idUsuario = req.params.usuario;
+
+    quizModel.exibirQtdUserQuiz2(idUsuario)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao realizar o cadastro! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+    );
+}
+
+function exibirQtdUserQuiz3(req, res) {
+        var idUsuario = req.params.usuario;
+
+    quizModel.exibirQtdUserQuiz3(idUsuario)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao realizar o cadastro! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+    );
+}
+
 function finalizar(req, res) {
         var score = req.body.scoreServer
         var idUsuario = req.body.idUsuarioServer
@@ -46,5 +86,7 @@ function finalizar(req, res) {
 
 module.exports = {
     exibirQtdUserQuiz,
+    exibirQtdUserQuiz2,
+    exibirQtdUserQuiz3,
     finalizar
 }

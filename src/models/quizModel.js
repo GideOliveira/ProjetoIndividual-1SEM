@@ -12,9 +12,27 @@ function finalizar(score, idUsuario, idQuiz) {
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 
-function exibirQtdUserRanking() {
+function exibirQtdUserQuiz() {
     var instrucao = `
-    SELECT COUNT(DISTINCT fkUsuario) as quantidadeUsuario FROM usuario;
+    SELECT COUNT(DISTINCT id) as quantidadeUsuario FROM usuario;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function exibirQtdUserQuiz2(idUsuario) {
+    var instrucao = `
+    SELECT SUM(acertos), COUNT(tentativa.id) FROM tentativa JOIN usuario on fkUsuario = usuario.id JOIN quiz ON 
+    fkQuiz = quiz.id WHERE usuario.id = ${idUsuario} AND fkQuiz = 1;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function exibirQtdUserQuiz3(idUsuario) {
+    var instrucao = `
+    SELECT SUM(acertos), COUNT(tentativa.id) FROM tentativa JOIN usuario on fkUsuario = usuario.id JOIN quiz ON 
+    fkQuiz = quiz.id WHERE usuario.id = ${idUsuario} AND fkQuiz = 2;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -22,6 +40,8 @@ function exibirQtdUserRanking() {
 
 
 module.exports = {
-    exibirQtdUserRanking,
+    exibirQtdUserQuiz,
+    exibirQtdUserQuiz2,
+    exibirQtdUserQuiz3,
     finalizar
 };

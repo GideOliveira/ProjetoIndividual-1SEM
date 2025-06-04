@@ -30,10 +30,10 @@ function entrar() {
                     console.log(json);
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL = json.email;
-                    sessionStorage.NOME = json.nome;
+                    sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID = json.id;
                     setTimeout(function () {
-                        window.location = "albuns.html"; // caminho para o arquivo do quiz
+                        window.location = "pagQuiz.html"; // caminho para o arquivo do quiz
                     }, 1000); // apenas para exibir o loading
 
                 });

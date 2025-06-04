@@ -15,10 +15,10 @@
         <!-- Começo header -->
         <div class="side-bar">
             <img src="img/logo.webp" alt="">
-
-            <div class="hello">
-                <h3>Olá, <span id="oi_usuario">undefined</span>!</h3>
-            </div>
+            
+        <div class="hello">
+            <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+        </div>
 
             <ul>
                 <li><a href="dashboard.html"><i class="fas fa-tv"></i>Dashboard</a></li>
@@ -47,3 +47,7 @@
     </div>
 </body>
 </html>
+
+<script>
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+</script>
